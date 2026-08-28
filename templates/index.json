@@ -63,7 +63,7 @@
         "card_3": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "creative-supplies",
             "custom_title": "Creative Supplies",
             "custom_description": "Archival gel pens & brass bookmarks",
             "link": "/collections/creative-supplies"
@@ -72,7 +72,7 @@
         "card_4": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "gift-sets",
             "custom_title": "Gift Sets",
             "custom_description": "Mindfully assembled ritual boxes",
             "link": "/collections/gift-sets"
