@@ -1,4 +1,4 @@
-﻿{%- liquid
+{%- liquid
   assign shipping_threshold_cents = 7000
   assign current_total = cart.total_price | default: 0
   assign remaining_cents = shipping_threshold_cents | minus: current_total

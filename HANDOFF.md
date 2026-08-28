@@ -1,4 +1,4 @@
-﻿# The Quiet Page — Shopify Theme Merchant & Maintainer Handoff Guide
+# The Quiet Page — Shopify Theme Merchant & Maintainer Handoff Guide
 
 **Theme**: The Quiet Page (Bespoke Shopify 2.0 Theme)  
 **Foundation**: Shopify Dawn v16.0.0  
