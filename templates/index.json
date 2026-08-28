@@ -199,6 +199,7 @@
         "card_1": {
           "type": "editorial_card",
           "settings": {
+            "image": "shopify://shop_images/five-questions-for-evening-reflection.png",
             "category": "Rituals",
             "title": "The Architecture of a Quiet Morning",
             "excerpt": "Setting aside ten minutes before digital noise reshapes focus and inner clarity.",
@@ -209,6 +210,7 @@
         "card_2": {
           "type": "editorial_card",
           "settings": {
+            "image": "shopify://shop_images/why-tactile-paper-still-matters.png",
             "category": "Writing Prompts",
             "title": "Five Questions for Evening Reflection",
             "excerpt": "Gentle inquiry to release tension, celebrate small victories, and ground your thoughts.",
@@ -219,6 +221,7 @@
         "card_3": {
           "type": "editorial_card",
           "settings": {
+            "image": "shopify://shop_images/five-questions-for-evening-reflection.png",
             "category": "Craftsmanship",
             "title": "Why Tactile Paper Still Matters",
             "excerpt": "The neuroscience of handwriting on heavy archival fibers versus tapping glass.",
