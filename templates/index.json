@@ -45,7 +45,7 @@
         "card_1": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "shop-journals",
             "custom_title": "Shop Journals",
             "custom_description": "Linen hardcovers & daily reflections",
             "link": "/collections/journals"
@@ -54,7 +54,7 @@
         "card_2": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "guided-journals",
             "custom_title": "Guided Journals",
             "custom_description": "Prompts, habit logs & intentions",
             "link": "/collections/guided-journals"
