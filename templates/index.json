@@ -99,7 +99,7 @@
       "settings": {
         "heading": "Thoughtful tools for every page.",
         "subheading": "Bestsellers & New Arrivals",
-        "collection": "",
+        "collection": "shop-journals",
         "products_to_show": 4,
         "columns_desktop": 4,
         "enable_quick_add": true,
