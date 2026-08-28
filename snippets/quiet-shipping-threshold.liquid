@@ -1,0 +1,31 @@
+﻿{%- liquid
+  assign shipping_threshold_cents = 7000
+  assign current_total = cart.total_price | default: 0
+  assign remaining_cents = shipping_threshold_cents | minus: current_total
+  
+  if current_total >= shipping_threshold_cents
+    assign is_unlocked = true
+    assign progress_pct = 100
+  else
+    assign is_unlocked = false
+    if current_total > 0
+      assign progress_pct = current_total | times: 100 | divided_by: shipping_threshold_cents
+    else
+      assign progress_pct = 0
+    endif
+  endif
+-%}
+
+<div class="quiet-shipping-threshold{% if is_unlocked %} quiet-shipping-threshold--unlocked{% endif %}" data-threshold="7000" data-current="{{ current_total }}">
+  <div class="quiet-shipping-threshold__text">
+    {%- if is_unlocked -%}
+      <span>You’ve unlocked free U.S. standard shipping.</span>
+    {%- else -%}
+      <span>You’re <strong>{{ remaining_cents | money }}</strong> away from free U.S. standard shipping.</span>
+    {%- endif -%}
+  </div>
+
+  <div class="quiet-shipping-threshold__track" role="progressbar" aria-valuenow="{{ progress_pct }}" aria-valuemin="0" aria-valuemax="100">
+    <div class="quiet-shipping-threshold__fill" style="width: {{ progress_pct }}%;"></div>
+  </div>
+</div>

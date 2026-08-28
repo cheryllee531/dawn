@@ -1,4 +1,4 @@
-{
+﻿{
   "sections": {
     "main": {
       "type": "main-product",
@@ -36,6 +36,61 @@
         "description": {
           "type": "description"
         },
+        "tab_details": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Details",
+            "content": "<p>Archival quality, lay-flat Smyth-sewn binding, 192 numbered pages with subtle dot grid or ruled lines, and ribbon bookmark.</p>",
+            "icon": "check_mark"
+          }
+        },
+        "tab_materials": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Materials",
+            "content": "<p>100% natural Belgian linen cover, 120gsm FSC-certified acid-free paper, fountain-pen friendly with zero ink bleeding.</p>",
+            "icon": "leaf"
+          }
+        },
+        "tab_dimensions": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Size & Dimensions",
+            "content": "<p>A5 format: 5.8 x 8.3 inches (148 x 210 mm). Thickness: 0.7 inches (18 mm). Weight: 420g.</p>",
+            "icon": "ruler"
+          }
+        },
+        "tab_shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "content": "<p>Orders ship within 1–3 business days. Free U.S. standard shipping on orders $70+. 30-day quiet returns on unopened items in original packaging.</p>",
+            "icon": "truck"
+          }
+        },
+        "tab_care": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Care Instructions",
+            "content": "<p>Keep in a dry environment away from direct sunlight. Spot clean linen covers gently with a dry or slightly damp cloth.</p>",
+            "icon": "heart"
+          }
+        },
+        "tab_faq": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "FAQ",
+            "content": "<p>Does this paper bleed with fountain pens? No, our 120gsm archival paper is rigorously tested with gel, fountain, and pigment inks.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pair it with",
+            "product_list_limit": 3
+          }
+        },
         "share": {
           "type": "share",
           "settings": {
@@ -51,6 +106,13 @@
         "quantity_selector",
         "buy_buttons",
         "description",
+        "tab_details",
+        "tab_materials",
+        "tab_dimensions",
+        "tab_shipping",
+        "tab_care",
+        "tab_faq",
+        "complementary",
         "share"
       ],
       "settings": {
@@ -66,17 +128,10 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
-        "padding_bottom": 12
+        "padding_bottom": 24
       }
     },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 0
-      }
-    },
-    "related-products": {
+    "related_products": {
       "type": "related-products",
       "settings": {
         "heading": "You may also like",
@@ -88,16 +143,53 @@
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
+        "show_rating": true,
         "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 28
+      }
+    },
+    "benefits": {
+      "type": "quiet-benefits",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "book",
+            "title": "Thoughtfully curated",
+            "description": "Archival materials and lay-flat binding chosen to honor your words."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "feather",
+            "title": "Made for your rhythm",
+            "description": "Undated prompts and mindful layouts adapted to your natural flow."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "gift",
+            "title": "Gift-ready moments",
+            "description": "Hand-wrapped packaging and custom gift notes with every order."
+          }
+        }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {
+        "heading": "The Quiet Page Promise",
+        "subheading": "Mindful craftsmanship in every detail",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
   "order": [
     "main",
-    "disclosures",
-    "related-products"
+    "related_products",
+    "benefits"
   ]
 }

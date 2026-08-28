@@ -1,0 +1,138 @@
+﻿{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .quiet-brand-story-wrapper {
+    text-align: center;
+    max-width: 78rem;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .quiet-brand-story-quote-mark {
+    font-family: var(--font-quiet-serif);
+    font-size: 5.6rem;
+    line-height: 1;
+    color: var(--color-quiet-clay);
+    opacity: 0.5;
+    margin-bottom: -1.6rem;
+  }
+
+  .quiet-brand-story-actions {
+    margin-top: 3.2rem;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="quiet-container">
+    <div class="quiet-brand-story-wrapper">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="quiet-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+
+      <div class="quiet-brand-story-quote-mark">“</div>
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="quiet-editorial-heading quiet-heading--xl">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.story_text != blank -%}
+        <div class="quiet-lead rte">
+          {{ section.settings.story_text }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <div class="quiet-brand-story-actions">
+          <a
+            href="{{ section.settings.button_link | default: '/pages/about' }}"
+            class="quiet-btn-secondary"
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Centered Brand Story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow / Subheading",
+      "default": "Our Philosophy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Make space for what matters."
+    },
+    {
+      "type": "richtext",
+      "id": "story_text",
+      "label": "Story Copy",
+      "default": "<p>In a world of constant noise and perpetual urgency, The Quiet Page was created as an invitation to pause. We craft premium journals, archival writing instruments, and mindful desk objects that honor your thoughts and give permanence to your reflection.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "CTA Button Label",
+      "default": "About The Quiet Page"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Centered Brand Story"
+    }
+  ]
+}
+{% endschema %}

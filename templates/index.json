@@ -1,75 +1,275 @@
-{
+﻿{
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "quiet-hero",
+      "settings": {
+        "eyebrow": "Mindful Stationery & Guided Journals",
+        "heading": "A quiet place for your thoughts.",
+        "body": "<p>Thoughtfully crafted tools designed to bring intention, stillness, and creative focus to your daily rhythm.</p>",
+        "layout": "text_first",
+        "primary_button_label": "Shop Journals",
+        "primary_button_link": "/collections/journals",
+        "secondary_button_label": "Explore Gift Sets",
+        "secondary_button_link": "/collections/gift-sets",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "brand_story": {
+      "type": "quiet-brand-story",
+      "settings": {
+        "eyebrow": "Our Philosophy",
+        "heading": "Make space for what matters.",
+        "story_text": "<p>In a world of constant noise and perpetual urgency, The Quiet Page was created as an invitation to pause. We craft premium journals, archival writing instruments, and mindful desk objects that honor your thoughts and give permanence to your reflection.</p>",
+        "button_label": "About The Quiet Page",
+        "button_link": "/pages/about",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "collection_grid": {
+      "type": "quiet-collection-grid",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "card_1": {
+          "type": "collection_card",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "custom_title": "Shop Journals",
+            "custom_description": "Linen hardcovers & daily reflections",
+            "link": "/collections/journals"
           }
         },
-        "button": {
-          "type": "buttons",
+        "card_2": {
+          "type": "collection_card",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "custom_title": "Guided Journals",
+            "custom_description": "Prompts, habit logs & intentions",
+            "link": "/collections/guided-journals"
+          }
+        },
+        "card_3": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Creative Supplies",
+            "custom_description": "Archival gel pens & brass bookmarks",
+            "link": "/collections/creative-supplies"
+          }
+        },
+        "card_4": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Gift Sets",
+            "custom_description": "Mindfully assembled ritual boxes",
+            "link": "/collections/gift-sets"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
+        "heading": "Explore Our Collections",
+        "subheading": "Curated for mindful living",
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "featured_products": {
+      "type": "quiet-featured-products",
+      "settings": {
+        "heading": "Thoughtful tools for every page.",
+        "subheading": "Bestsellers & New Arrivals",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "enable_quick_add": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "bundle_kit": {
+      "type": "quiet-bundle-kit",
+      "blocks": {
+        "item_1": {
+          "type": "kit_item",
+          "settings": {
+            "title": "1x Linen Hardcover Guided Journal",
+            "description": "Choice of Clay, Forest, or Sand"
+          }
+        },
+        "item_2": {
+          "type": "kit_item",
+          "settings": {
+            "title": "1x Archival Brass Gel Pen",
+            "description": "Refillable 0.5mm black ink"
+          }
+        },
+        "item_3": {
+          "type": "kit_item",
+          "settings": {
+            "title": "1x Botanical Clip & Bookmark Set",
+            "description": "Solid brass page keeper"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "settings": {
+        "eyebrow": "Curated Bundles",
+        "heading": "Build your quiet kit.",
+        "body": "<p>Select a guided linen journal, archival brass pen, and botanical bookmark set for a harmonious daily writing ritual. Complete with our signature gift packaging.</p>",
+        "bundle_price": "$84.00",
+        "bundle_compare_price": "$102.00",
+        "button_label": "Shop Journaling Essentials",
+        "button_link": "/collections/gift-sets",
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "benefits": {
+      "type": "quiet-benefits",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "book",
+            "title": "Thoughtfully curated",
+            "description": "Archival materials and lay-flat binding chosen to honor your words."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "feather",
+            "title": "Made for your rhythm",
+            "description": "Undated prompts and mindful layouts adapted to your natural flow."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "gift",
+            "title": "Gift-ready moments",
+            "description": "Hand-wrapped packaging and custom gift notes with every order."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3"
+      ],
+      "settings": {
+        "heading": "Why The Quiet Page",
+        "subheading": "Mindful craftsmanship in every detail",
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "inspiration": {
+      "type": "quiet-inspiration",
+      "blocks": {
+        "card_1": {
+          "type": "editorial_card",
+          "settings": {
+            "category": "Rituals",
+            "title": "The Architecture of a Quiet Morning",
+            "excerpt": "Setting aside ten minutes before digital noise reshapes focus and inner clarity."
+          }
+        },
+        "card_2": {
+          "type": "editorial_card",
+          "settings": {
+            "category": "Writing Prompts",
+            "title": "Five Questions for Evening Reflection",
+            "excerpt": "Gentle inquiry to release tension, celebrate small victories, and ground your thoughts."
+          }
+        },
+        "card_3": {
+          "type": "editorial_card",
+          "settings": {
+            "category": "Craftsmanship",
+            "title": "Why Tactile Paper Still Matters",
+            "excerpt": "The neuroscience of handwriting on heavy archival fibers versus tapping glass."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "heading": "Notes on Stillness & Practice",
+        "subheading": "Journaling essays, rituals, and inspiration",
+        "post_limit": 3,
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "image_with_text": {
+      "type": "quiet-image-with-text",
+      "settings": {
+        "eyebrow": "Artisanal Materials",
+        "heading": "Crafted with archival papers & Belgian linen.",
+        "body": "<p>Every journal is Smyth-sewn to lay completely flat at 180 degrees, wrapped in tactile natural linen, and filled with 120gsm fountain pen friendly paper that welcomes ink without bleed or feathering.</p>",
+        "layout": "image_first",
+        "button_label": "Explore Craftsmanship",
+        "button_link": "/pages/about",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "newsletter": {
+      "type": "quiet-newsletter",
+      "settings": {
+        "heading": "A little space in your inbox.",
+        "subheading": "Mindful reflections, writing prompts, and early access to new releases. Never spam, only quiet moments.",
+        "button_text": "Join the list",
+        "placeholder": "Enter your email address",
+        "show_consent": true,
+        "consent_text": "I agree to receive mindful updates and occasional quiet offers.",
+        "privacy_note": "We respect your peace. Unsubscribe with one click anytime.",
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "shipping_threshold": {
+      "type": "quiet-shipping-threshold",
+      "settings": {
+        "threshold_amount": 70,
+        "message_away": "You’re [amount] away from free U.S. standard shipping.",
+        "message_qualified": "You’ve unlocked free U.S. standard shipping.",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 24
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "brand_story",
+    "collection_grid",
+    "featured_products",
+    "bundle_kit",
+    "benefits",
+    "inspiration",
+    "image_with_text",
+    "newsletter",
+    "shipping_threshold"
   ]
 }

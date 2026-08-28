@@ -1,0 +1,215 @@
+﻿{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .quiet-newsletter-box {
+    max-width: 68rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3.6rem 2.4rem;
+    border-radius: var(--quiet-radius-base);
+    background-color: var(--color-quiet-ivory);
+    border: 1px solid var(--color-quiet-border);
+    box-shadow: var(--quiet-shadow-card);
+  }
+
+  .quiet-newsletter-form {
+    margin-top: 2.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+  }
+
+  .quiet-newsletter-input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 48rem;
+    gap: 1.2rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .quiet-newsletter-input-group {
+      flex-direction: row;
+    }
+  }
+
+  .quiet-newsletter-field {
+    flex-grow: 1;
+    font-family: var(--font-quiet-sans);
+    font-size: 1.4rem;
+    padding: 1.2rem 1.6rem;
+    border: 1px solid var(--color-quiet-border);
+    border-radius: var(--quiet-radius-base);
+    background-color: var(--color-quiet-cream);
+    color: var(--color-quiet-charcoal);
+  }
+
+  .quiet-newsletter-field:focus {
+    border-color: var(--color-quiet-terracotta);
+    outline: none;
+  }
+
+  .quiet-newsletter-consent {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-quiet-sans);
+    font-size: 1.2rem;
+    color: rgba(var(--color-quiet-charcoal-rgb), 0.7);
+    margin-top: 0.4rem;
+  }
+
+  .quiet-newsletter-privacy {
+    font-family: var(--font-quiet-sans);
+    font-size: 1.15rem;
+    color: rgba(var(--color-quiet-charcoal-rgb), 0.6);
+    margin-top: 1.2rem;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="quiet-container">
+    <div class="quiet-newsletter-box">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="quiet-editorial-heading quiet-heading--lg">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="quiet-body">
+          {{ section.settings.subheading | escape }}
+        </p>
+      {%- endif -%}
+
+      {%- form 'customer', class: 'quiet-newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter,quiet-list">
+        
+        <div class="quiet-newsletter-input-group">
+          <input
+            type="email"
+            name="contact[email]"
+            class="quiet-newsletter-field"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            placeholder="{{ section.settings.placeholder | default: 'Enter your email address' }}"
+            required
+          >
+          <button type="submit" class="quiet-btn-primary" name="commit">
+            {{ section.settings.button_text | default: 'Join the list' }}
+          </button>
+        </div>
+
+        {%- if section.settings.show_consent -%}
+          <label class="quiet-newsletter-consent">
+            <input type="checkbox" name="customer[accepts_marketing]" checked required>
+            <span>{{ section.settings.consent_text | default: 'I agree to receive mindful updates and occasional quiet offers.' }}</span>
+          </label>
+        {%- endif -%}
+
+        {%- if section.settings.privacy_note != blank -%}
+          <p class="quiet-newsletter-privacy">
+            {{ section.settings.privacy_note | escape }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Calm Newsletter Signup",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A little space in your inbox."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Mindful reflections, writing prompts, and early access to new releases. Never spam, only quiet moments."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Submit Button Text",
+      "default": "Join the list"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Input Placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_consent",
+      "label": "Show Consent Checkbox",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "consent_text",
+      "label": "Consent Text",
+      "default": "I agree to receive mindful updates and occasional quiet offers."
+    },
+    {
+      "type": "text",
+      "id": "privacy_note",
+      "label": "Privacy Note",
+      "default": "We respect your peace. Unsubscribe with one click anytime."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calm Newsletter Signup"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,303 @@
+﻿{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .quiet-collection-header {
+    text-align: center;
+    margin-bottom: 3.6rem;
+  }
+
+  .quiet-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .quiet-collection-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 4 }}, 1fr);
+      gap: 2.4rem;
+    }
+  }
+
+  .quiet-collection-card {
+    position: relative;
+    border-radius: var(--quiet-radius-base);
+    overflow: hidden;
+    background-color: var(--color-quiet-ivory);
+    border: 1px solid var(--color-quiet-border);
+    transition: transform var(--quiet-transition-base), box-shadow var(--quiet-transition-base), border-color var(--quiet-transition-base);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .quiet-collection-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--quiet-shadow-card);
+    border-color: rgba(var(--color-quiet-charcoal-rgb), 0.2);
+  }
+
+  .quiet-collection-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: var(--color-quiet-cream);
+  }
+
+  .quiet-collection-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--quiet-transition-smooth);
+  }
+
+  .quiet-collection-card:hover .quiet-collection-image {
+    transform: scale(1.04);
+  }
+
+  .quiet-collection-info {
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .quiet-collection-title {
+    font-family: var(--font-quiet-serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-quiet-charcoal);
+    margin: 0 0 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .quiet-collection-arrow {
+    font-size: 1.4rem;
+    color: var(--color-quiet-terracotta);
+    transition: transform var(--quiet-transition-fast);
+  }
+
+  .quiet-collection-card:hover .quiet-collection-arrow {
+    transform: translateX(4px);
+  }
+
+  .quiet-collection-desc {
+    font-family: var(--font-quiet-sans);
+    font-size: 1.25rem;
+    color: rgba(var(--color-quiet-charcoal-rgb), 0.7);
+    margin: 0;
+    line-height: 1.4;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="quiet-container">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="quiet-collection-header">
+        {%- if section.settings.subheading != blank -%}
+          <span class="quiet-eyebrow">{{ section.settings.subheading | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="quiet-editorial-heading quiet-heading--lg">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="quiet-collection-grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign target_collection = block.settings.collection
+          assign card_title = block.settings.custom_title | default: target_collection.title | default: 'Collection'
+          assign card_url = block.settings.link | default: target_collection.url | default: '/collections/all'
+          assign card_desc = block.settings.custom_description | default: target_collection.description | strip_html | truncatewords: 10
+        -%}
+        <a href="{{ card_url }}" class="quiet-collection-card" {{ block.shopify_attributes }}>
+          <div class="quiet-collection-media">
+            {%- if block.settings.custom_image != blank -%}
+              {{
+                block.settings.custom_image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '240, 360, 480, 720',
+                  class: 'quiet-collection-image',
+                  alt: card_title | escape
+              }}
+            {%- elsif target_collection.featured_image != blank -%}
+              {{
+                target_collection.featured_image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '240, 360, 480, 720',
+                  class: 'quiet-collection-image',
+                  alt: card_title | escape
+              }}
+            {%- else -%}
+              <div class="quiet-hero-placeholder">
+                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="quiet-info quiet-collection-info">
+            <h3 class="quiet-collection-title">
+              <span>{{ card_title | escape }}</span>
+              <span class="quiet-collection-arrow" aria-hidden="true">&rarr;</span>
+            </h3>
+            {%- if card_desc != blank -%}
+              <p class="quiet-collection-desc">{{ card_desc }}</p>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Editorial Collection Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Explore Our Collections"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Curated for mindful living"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4,
+      "label": "Columns on Desktop"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title"
+        },
+        {
+          "type": "text",
+          "id": "custom_description",
+          "label": "Custom Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Collection Grid",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Shop Journals",
+            "custom_description": "Linen hardcovers & daily reflections",
+            "link": "/collections/journals"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Guided Journals",
+            "custom_description": "Prompts, habit logs & intentions",
+            "link": "/collections/guided-journals"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Creative Supplies",
+            "custom_description": "Archival gel pens & brass bookmarks",
+            "link": "/collections/creative-supplies"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Gift Sets",
+            "custom_description": "Mindfully assembled ritual boxes",
+            "link": "/collections/gift-sets"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

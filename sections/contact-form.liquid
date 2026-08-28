@@ -101,6 +101,16 @@
       </div>
       <div class="field">
         <input
+          type="text"
+          id="ContactForm-order-number"
+          class="field__input"
+          name="contact[Order Number]"
+          placeholder="Order number (optional)"
+        >
+        <label class="field__label" for="ContactForm-order-number">Order number (optional)</label>
+      </div>
+      <div class="field">
+        <input
           type="tel"
           id="ContactForm-phone"
           class="field__input"
@@ -130,6 +140,15 @@
         <button type="submit" class="button">
           {{ 'templates.contact.form.send' | t }}
         </button>
+      </div>
+
+      <div class="quiet-contact-support-notice" style="margin-top: 2.4rem; padding: 1.6rem; background: var(--color-quiet-cream); border: 1px solid var(--color-quiet-border); border-radius: var(--quiet-radius-base); text-align: center;">
+        <p style="margin: 0 0 0.6rem; font-family: var(--font-quiet-sans); font-size: 1.4rem; color: var(--color-quiet-charcoal);">
+          Prefer direct email? Reach our studio team at <a href="mailto:cheryllee531@outlook.com" style="color: var(--color-quiet-terracotta); font-weight: 600;">cheryllee531@outlook.com</a>
+        </p>
+        <p style="margin: 0; font-family: var(--font-quiet-sans); font-size: 1.25rem; color: rgba(var(--color-quiet-charcoal-rgb), 0.7);">
+          We respond gently within 1–2 business days, Monday through Friday.
+        </p>
       </div>
     {%- endform -%}
   </div>

@@ -1,0 +1,288 @@
+﻿{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .quiet-bundle-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.6rem;
+    align-items: center;
+    background-color: var(--color-quiet-ivory);
+    border: 1px solid var(--color-quiet-border);
+    border-radius: var(--quiet-radius-base);
+    padding: 3.2rem 2.4rem;
+    box-shadow: var(--quiet-shadow-card);
+  }
+
+  @media screen and (min-width: 990px) {
+    .quiet-bundle-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      padding: 4.8rem 5.6rem;
+      gap: 5.6rem;
+    }
+  }
+
+  .quiet-bundle-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 2.4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .quiet-bundle-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    font-family: var(--font-quiet-sans);
+    font-size: 1.4rem;
+    color: var(--color-quiet-charcoal);
+  }
+
+  .quiet-bundle-item-icon {
+    width: 2.0rem;
+    height: 2.0rem;
+    border-radius: var(--quiet-radius-pill);
+    background-color: var(--color-quiet-clay);
+    color: var(--color-quiet-charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .quiet-bundle-price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin: 2.0rem 0 2.4rem;
+  }
+
+  .quiet-bundle-price {
+    font-family: var(--font-quiet-serif);
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--color-quiet-terracotta);
+  }
+
+  .quiet-bundle-compare {
+    font-family: var(--font-quiet-sans);
+    font-size: 1.8rem;
+    color: rgba(var(--color-quiet-charcoal-rgb), 0.5);
+    text-decoration: line-through;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="quiet-container">
+    <div class="quiet-bundle-grid">
+      <div class="quiet-bundle-content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="quiet-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="quiet-editorial-heading quiet-heading--xl">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="quiet-body rte">
+            {{ section.settings.body }}
+          </div>
+        {%- endif -%}
+
+        <ul class="quiet-bundle-items-list">
+          {%- for block in section.blocks -%}
+            <li class="quiet-bundle-item" {{ block.shopify_attributes }}>
+              <span class="quiet-bundle-item-icon">✓</span>
+              <div>
+                <strong>{{ block.settings.title | escape }}</strong>
+                {%- if block.settings.description != blank -%}
+                  <span> — {{ block.settings.description | escape }}</span>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="quiet-bundle-price-wrap">
+          <span class="quiet-bundle-price">{{ section.settings.bundle_price | default: '$84.00' }}</span>
+          {%- if section.settings.bundle_compare_price != blank -%}
+            <span class="quiet-bundle-compare">{{ section.settings.bundle_compare_price }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.button_label != blank -%}
+          <a
+            href="{{ section.settings.button_link | default: '/collections/gift-sets' }}"
+            class="quiet-btn-primary"
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="quiet-bundle-media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1000
+            | image_tag:
+              loading: 'lazy',
+              widths: '300, 500, 750, 1000',
+              class: 'quiet-hero-image',
+              alt: section.settings.heading | escape
+          }}
+        {%- else -%}
+          <div class="quiet-hero-placeholder" style="border-radius: 6px;">
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Curated Bundle / Quiet Kit",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow / Subheading",
+      "default": "Curated Bundles"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build your quiet kit."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body Text",
+      "default": "<p>Select a guided linen journal, archival brass pen, and botanical bookmark set for a harmonious daily writing ritual. Complete with our signature gift packaging.</p>"
+    },
+    {
+      "type": "text",
+      "id": "bundle_price",
+      "label": "Bundle Price",
+      "default": "$84.00"
+    },
+    {
+      "type": "text",
+      "id": "bundle_compare_price",
+      "label": "Compare-at Price",
+      "default": "$102.00"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Journaling Essentials"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bundle Image"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "kit_item",
+      "name": "Kit Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Item Title",
+          "default": "1x Linen Hardcover Journal"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Item Note",
+          "default": "120gsm lay-flat fountain paper"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Curated Bundle / Quiet Kit",
+      "blocks": [
+        {
+          "type": "kit_item",
+          "settings": {
+            "title": "1x Linen Hardcover Guided Journal",
+            "description": "Choice of Clay, Forest, or Sand"
+          }
+        },
+        {
+          "type": "kit_item",
+          "settings": {
+            "title": "1x Archival Brass Gel Pen",
+            "description": "Refillable 0.5mm black ink"
+          }
+        },
+        {
+          "type": "kit_item",
+          "settings": {
+            "title": "1x Botanical Clip & Bookmark Set",
+            "description": "Solid brass page keeper"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

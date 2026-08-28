@@ -1,0 +1,191 @@
+﻿{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .quiet-split-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.6rem;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .quiet-split-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 6.4rem;
+    }
+    .quiet-split-grid--text-first .quiet-split-media {
+      order: 2;
+    }
+    .quiet-split-grid--text-first .quiet-split-content {
+      order: 1;
+    }
+  }
+
+  .quiet-split-media {
+    width: 100%;
+    border-radius: var(--quiet-radius-base);
+    overflow: hidden;
+    box-shadow: var(--quiet-shadow-card);
+    border: 1px solid var(--color-quiet-border);
+  }
+
+  .quiet-split-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4 / 3;
+  }
+
+  .quiet-split-actions {
+    margin-top: 2.8rem;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="quiet-container">
+    <div class="quiet-split-grid{% if section.settings.layout == 'text_first' %} quiet-split-grid--text-first{% endif %}">
+      <div class="quiet-split-media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1000
+            | image_tag:
+              loading: 'lazy',
+              widths: '375, 550, 750, 1000',
+              class: 'quiet-split-image',
+              alt: section.settings.heading | escape
+          }}
+        {%- else -%}
+          <div class="quiet-hero-placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="quiet-split-content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="quiet-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="quiet-editorial-heading quiet-heading--xl">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="quiet-body rte">
+            {{ section.settings.body }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <div class="quiet-split-actions">
+            <a
+              href="{{ section.settings.button_link | default: '/pages/about' }}"
+              class="quiet-btn-primary"
+            >
+              {{ section.settings.button_label | escape }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quiet Image With Text",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow / Subheading",
+      "default": "Artisanal Materials"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Crafted with archival papers & Belgian linen."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body Text",
+      "default": "<p>Every journal is Smyth-sewn to lay completely flat at 180 degrees, wrapped in tactile natural linen, and filled with 120gsm fountain pen friendly paper that welcomes ink without bleed or feathering.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop Layout",
+      "options": [
+        { "value": "image_first", "label": "Image First" },
+        { "value": "text_first", "label": "Text First" }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "CTA Button Label",
+      "default": "Explore Craftsmanship"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiet Image With Text"
+    }
+  ]
+}
+{% endschema %}

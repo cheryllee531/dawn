@@ -484,7 +484,7 @@
           "settings": {
             "text": {
               "label": "Text",
-              "default": "Welcome to our store"
+              "default": "Free U.S. standard shipping on orders $70+"
             },
             "text_alignment": {
               "label": "Text alignment",
