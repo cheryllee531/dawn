@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -11,10 +20,12 @@
           }
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -24,7 +35,8 @@
           }
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -34,54 +46,55 @@
           }
         },
         "description": {
-          "type": "description"
+          "type": "description",
+          "settings": {}
         },
         "tab_details": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Details",
-            "content": "<p>Archival quality, lay-flat Smyth-sewn binding, 192 numbered pages with subtle dot grid or ruled lines, and ribbon bookmark.</p>",
-            "icon": "check_mark"
+            "icon": "check_mark",
+            "content": "<p>Archival quality, lay-flat Smyth-sewn binding, 192 numbered pages with subtle dot grid or ruled lines, and ribbon bookmark.</p>"
           }
         },
         "tab_materials": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Materials",
-            "content": "<p>100% natural Belgian linen cover, 120gsm FSC-certified acid-free paper, fountain-pen friendly with zero ink bleeding.</p>",
-            "icon": "leaf"
+            "icon": "leaf",
+            "content": "<p>100% natural Belgian linen cover, 120gsm FSC-certified acid-free paper, fountain-pen friendly with zero ink bleeding.</p>"
           }
         },
         "tab_dimensions": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Size & Dimensions",
-            "content": "<p>A5 format: 5.8 x 8.3 inches (148 x 210 mm). Thickness: 0.7 inches (18 mm). Weight: 420g.</p>",
-            "icon": "ruler"
+            "icon": "ruler",
+            "content": "<p>A5 format: 5.8 x 8.3 inches (148 x 210 mm). Thickness: 0.7 inches (18 mm). Weight: 420g.</p>"
           }
         },
         "tab_shipping": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Shipping & Returns",
-            "content": "<p>Orders ship within 1–3 business days. Free U.S. standard shipping on orders $70+. 30-day quiet returns on unopened items in original packaging.</p>",
-            "icon": "truck"
+            "icon": "truck",
+            "content": "<p>Orders ship within 1–3 business days. Free U.S. standard shipping on orders $70+. 30-day quiet returns on unopened items in original packaging.</p>"
           }
         },
         "tab_care": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Care Instructions",
-            "content": "<p>Keep in a dry environment away from direct sunlight. Spot clean linen covers gently with a dry or slightly damp cloth.</p>",
-            "icon": "heart"
+            "icon": "heart",
+            "content": "<p>Keep in a dry environment away from direct sunlight. Spot clean linen covers gently with a dry or slightly damp cloth.</p>"
           }
         },
         "tab_faq": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "FAQ",
-            "content": "<p>Does this paper bleed with fountain pens? No, our 120gsm archival paper is rigorously tested with gel, fountain, and pigment inks.</p>",
-            "icon": "question_mark"
+            "icon": "question_mark",
+            "content": "<p>Does this paper bleed with fountain pens? No, our 120gsm archival paper is rigorously tested with gel, fountain, and pigment inks.</p>"
           }
         },
         "complementary": {
@@ -118,13 +131,13 @@
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
-        "media_position": "left",
-        "gallery_layout": "stacked",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "image_zoom": "lightbox",
+        "gallery_layout": "stacked",
         "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
@@ -138,13 +151,13 @@
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": true,
-        "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 28
       }
@@ -177,7 +190,11 @@
           }
         }
       },
-      "block_order": ["b1", "b2", "b3"],
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
         "heading": "The Quiet Page Promise",
         "subheading": "Mindful craftsmanship in every detail",
