@@ -1,0 +1,269 @@
+{% comment %}
+  The Quiet Page - Interactive Daily Reflection Prompt Section
+  Provides visitors with gentle journaling prompts to inspire their writing practice.
+{% endcomment %}
+
+<div class="quiet-daily-prompt-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="quiet-prompt-card-wrapper">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="quiet-prompt__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="quiet-prompt__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="quiet-prompt__subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
+      <div class="quiet-prompt-box" id="QuietPromptBox-{{ section.id }}">
+        <div class="quiet-prompt-box__quote-icon" aria-hidden="true">
+          <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.6667 13.3333H6.66667C6.66667 8.73333 10.0667 7.06667 11.6667 6.4V3.33333C7.26667 4.13333 3.33333 7.8 3.33333 13.3333V20.6667H11.6667V13.3333ZM24.6667 13.3333H19.6667C19.6667 8.73333 23.0667 7.06667 24.6667 6.4V3.33333C20.2667 4.13333 16.3333 7.8 16.3333 13.3333V20.6667H24.6667V13.3333Z" fill="currentColor" fill-opacity="0.35"/>
+          </svg>
+        </div>
+
+        <p class="quiet-prompt-text" id="QuietPromptText-{{ section.id }}" aria-live="polite">
+          {%- if section.blocks.size > 0 -%}
+            {{ section.blocks.first.settings.prompt_text | escape }}
+          {%- else -%}
+            What is one small thing that brought you quiet joy today?
+          {%- endif -%}
+        </p>
+
+        <div class="quiet-prompt-actions">
+          <button type="button" class="button button--primary quiet-prompt-draw-btn" id="QuietPromptBtn-{{ section.id }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="quiet-refresh-icon" aria-hidden="true">
+              <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+            </svg>
+            <span>{{ section.settings.button_label | default: 'Draw a prompt' }}</span>
+          </button>
+
+          <button type="button" class="quiet-copy-prompt-btn" id="QuietCopyBtn-{{ section.id }}" aria-label="Copy prompt to clipboard">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="quiet-copy-label">Copy prompt</span>
+          </button>
+        </div>
+      </div>
+
+      {%- if section.settings.link_text != blank -%}
+        <div class="quiet-prompt__footer-link">
+          <a href="{{ section.settings.link_url | default: '/collections/all' }}" class="quiet-text-arrow-link">
+            <span>{{ section.settings.link_text | escape }}</span>
+            <span class="quiet-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="QuietPromptsData-{{ section.id }}">
+  [
+    {%- for block in section.blocks -%}
+      {{ block.settings.prompt_text | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+</script>
+
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+    var textEl = document.getElementById('QuietPromptText-' + sectionId);
+    var btn = document.getElementById('QuietPromptBtn-' + sectionId);
+    var copyBtn = document.getElementById('QuietCopyBtn-' + sectionId);
+    var dataEl = document.getElementById('QuietPromptsData-' + sectionId);
+    if (!textEl || !btn || !dataEl) return;
+
+    var prompts = [];
+    try {
+      prompts = JSON.parse(dataEl.textContent);
+    } catch(e) {}
+
+    if (!prompts || prompts.length === 0) {
+      prompts = [
+        "What is one small thing that brought you quiet joy today?",
+        "What are you carrying right now that you can gently set down?",
+        "Describe a peaceful moment from this week in vivid detail.",
+        "What does your mind need more of in this season?",
+        "Write down three things you are grateful for before going to sleep."
+      ];
+    }
+
+    var currentIndex = 0;
+
+    btn.addEventListener('click', function() {
+      btn.classList.add('quiet-spinning');
+      textEl.style.opacity = '0';
+      textEl.style.transform = 'translateY(6px)';
+
+      setTimeout(function() {
+        var nextIndex;
+        if (prompts.length > 1) {
+          do {
+            nextIndex = Math.floor(Math.random() * prompts.length);
+          } while (nextIndex === currentIndex);
+        } else {
+          nextIndex = 0;
+        }
+        currentIndex = nextIndex;
+        textEl.textContent = prompts[currentIndex];
+        textEl.style.opacity = '1';
+        textEl.style.transform = 'translateY(0)';
+        btn.classList.remove('quiet-spinning');
+      }, 220);
+    });
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        var label = copyBtn.querySelector('.quiet-copy-label');
+        if (navigator.clipboard && textEl.textContent) {
+          navigator.clipboard.writeText(textEl.textContent.trim()).then(function() {
+            if (label) label.textContent = 'Copied!';
+            setTimeout(function() {
+              if (label) label.textContent = 'Copy prompt';
+            }, 2000);
+          });
+        }
+      });
+    }
+  })();
+</script>
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Daily Prompt",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "default": "Daily Ritual",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "A quiet moment for your thoughts.",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "default": "Take a breath. Draw a prompt to begin your reflection for the day.",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Draw a prompt",
+      "label": "Draw button label"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "default": "Browse guided reflection journals",
+      "label": "Footer link text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Footer link URL"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "prompt",
+      "name": "Journal Prompt",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "prompt_text",
+          "label": "Prompt text",
+          "default": "What is one small thing that brought you quiet joy today?"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Daily Prompt",
+      "blocks": [
+        {
+          "type": "prompt",
+          "settings": {
+            "prompt_text": "What is one small thing that brought you quiet joy today?"
+          }
+        },
+        {
+          "type": "prompt",
+          "settings": {
+            "prompt_text": "What are you carrying right now that you can gently set down?"
+          }
+        },
+        {
+          "type": "prompt",
+          "settings": {
+            "prompt_text": "Describe a peaceful moment from this week in vivid detail."
+          }
+        },
+        {
+          "type": "prompt",
+          "settings": {
+            "prompt_text": "What does your mind need more of in this season?"
+          }
+        },
+        {
+          "type": "prompt",
+          "settings": {
+            "prompt_text": "Write down three things you are grateful for before going to sleep."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

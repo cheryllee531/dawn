@@ -1,0 +1,92 @@
+{% comment %}
+  The Quiet Page - Mobile Sticky Add-to-Cart Bar
+  Appears seamlessly when scrolling past the main product buy button.
+{% endcomment %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div id="QuietStickyAtc-{{ section.id }}" class="quiet-sticky-atc" aria-hidden="true">
+  <div class="quiet-sticky-atc__inner">
+    <div class="quiet-sticky-atc__product">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 120 }}"
+          alt="{{ product.title | escape }}"
+          width="48"
+          height="48"
+          loading="lazy"
+          class="quiet-sticky-atc__image"
+        >
+      {%- endif -%}
+      <div class="quiet-sticky-atc__meta">
+        <span class="quiet-sticky-atc__title">{{ product.title | escape }}</span>
+        <div class="quiet-sticky-atc__price-row">
+          <span class="quiet-sticky-atc__price" id="QuietStickyPrice-{{ section.id }}">
+            {{ current_variant.price | money }}
+          </span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <s class="quiet-sticky-atc__compare-price">
+              {{ current_variant.compare_at_price | money }}
+            </s>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="quiet-sticky-atc__action">
+      <button
+        type="button"
+        id="QuietStickyBtn-{{ section.id }}"
+        class="button button--primary quiet-sticky-atc__button"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        <span>
+          {%- if current_variant.available -%}
+            {{ 'products.product.add_to_cart' | t | default: 'Add to Cart' }}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t | default: 'Sold Out' }}
+          {%- endif -%}
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+    var stickyBar = document.getElementById('QuietStickyAtc-' + sectionId);
+    var stickyBtn = document.getElementById('QuietStickyBtn-' + sectionId);
+    if (!stickyBar || !stickyBtn) return;
+
+    var mainForm = document.getElementById('product-form-' + sectionId);
+    var mainSubmitBtn = mainForm ? mainForm.querySelector('[type="submit"]') : null;
+
+    // Observe when the main buy button scrolls out of viewport
+    var targetBtn = mainSubmitBtn || mainForm;
+    if (targetBtn && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+            stickyBar.classList.add('is-visible');
+            stickyBar.setAttribute('aria-hidden', 'false');
+          } else {
+            stickyBar.classList.remove('is-visible');
+            stickyBar.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(targetBtn);
+    }
+
+    // Trigger main form submit when sticky button clicked
+    stickyBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (mainSubmitBtn && !mainSubmitBtn.disabled) {
+        mainSubmitBtn.click();
+      } else if (mainForm) {
+        mainForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    });
+  })();
+</script>

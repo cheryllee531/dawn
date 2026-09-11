@@ -115,6 +115,32 @@ The homepage (`templates/index.json`) is arranged in 10 editorial sections. To e
 - Includes fields for Name, Email, Order Number (optional), and Message.
 - Highlights studio support contact at `cheryllee531@outlook.com` with 1–2 business day response expectation.
 
+### 3.7 Interactive Daily Prompt Section
+- **Theme Customizer Section**: `"Daily Prompt"` (`sections/quiet-daily-prompt.liquid`).
+- **How to Edit**: In Theme Customizer, select any page (such as Homepage) and add the **Daily Prompt** section:
+  - Add or customize prompts using **Journal Prompt** blocks.
+  - Customize the heading, eyebrow, and button labels.
+  - Customers can click "Draw a prompt" to randomize a reflection question or "Copy prompt" to copy it.
+
+### 3.8 Gift Note & Recipient Name in Cart Drawer
+- **Location**: Cart Drawer (`snippets/cart-drawer.liquid`).
+- **How it Works**:
+  - Customers can click *"Sending as a gift? Add a handwritten note"* to expand the gift fields.
+  - Entered **Recipient's name** and **Gift message** are automatically stored in the native Shopify cart attributes.
+  - When an order is placed, you can view the exact gift note directly in **Shopify Admin > Orders > Order Details > Additional Details** for easy handwriting onto the gift card.
+
+### 3.9 Mobile Sticky Add-to-Cart Bar
+- **Location**: Product Pages (`snippets/quiet-sticky-atc.liquid`).
+- **How it Works**:
+  - Automatically activates when a shopper on mobile scrolls past the main buy button.
+  - Displays thumbnail, title, price, and Add to Cart button; connects directly to Dawn's cart drawer.
+
+### 3.10 Paper & Fountain Pen Guide Modal
+- **Location**: Product Pages (`snippets/quiet-paper-guide.liquid`).
+- **How it Works**:
+  - Accessible via the discreet *"View Paper & Fountain Pen Guide"* link right below the buy buttons.
+  - Outlines 120gsm and 160gsm archival specs, fountain pen testing results, and lay-flat Smyth-sewn binding.
+
 ---
 
 ## 4. Automated E2E Testing & Verification Results

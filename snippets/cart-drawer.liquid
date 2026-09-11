@@ -509,6 +509,51 @@
           </details>
         {%- endif -%}
 
+        <div class="quiet-gift-note-wrapper">
+          <details class="quiet-gift-details" id="QuietGiftDetails" {% if cart.attributes['Gift Note'] != blank or cart.attributes['Gift Recipient'] != blank %}open{% endif %}>
+            <summary class="quiet-gift-summary">
+              <span class="quiet-gift-summary__label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                  <rect x="2" y="7" width="20" height="5"></rect>
+                  <line x1="12" y1="22" x2="12" y2="7"></line>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+                <span>Sending as a gift? Add a handwritten note</span>
+              </span>
+              <span class="quiet-gift-toggle-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="quiet-gift-content">
+              <p class="quiet-gift-hint">Complimentary note penned with archival ink and placed in your parcel.</p>
+              <div class="field">
+                <input 
+                  type="text" 
+                  id="CartDrawer-GiftRecipient" 
+                  class="field__input" 
+                  name="attributes[Gift Recipient]" 
+                  placeholder="Recipient's name"
+                  value="{{ cart.attributes['Gift Recipient'] | escape }}"
+                  form="CartDrawer-Form"
+                >
+                <label class="field__label" for="CartDrawer-GiftRecipient">Recipient's name</label>
+              </div>
+              <div class="field" style="margin-top: 0.8rem;">
+                <textarea 
+                  id="CartDrawer-GiftNote" 
+                  class="text-area text-area--resize-vertical field__input" 
+                  name="attributes[Gift Note]" 
+                  placeholder="Write your note (up to 250 characters)..." 
+                  maxlength="250"
+                  rows="3"
+                  form="CartDrawer-Form"
+                >{{ cart.attributes['Gift Note'] | escape }}</textarea>
+                <label class="field__label" for="CartDrawer-GiftNote">Gift message</label>
+              </div>
+            </div>
+          </details>
+        </div>
+
         <!-- Start blocks -->
         <!-- Subtotals -->
 

@@ -1,0 +1,121 @@
+{% comment %}
+  The Quiet Page - Paper & Fountain Pen Guide Modal
+  Editorial slide-over modal detailing paper weights, ink bleeding tests, and binding specifications.
+{% endcomment %}
+
+<div id="QuietPaperGuideModal-{{ section.id }}" class="quiet-paper-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="QuietPaperModalTitle-{{ section.id }}">
+  <div class="quiet-paper-modal__overlay" data-close-modal tabindex="-1"></div>
+  <div class="quiet-paper-modal__container">
+    <div class="quiet-paper-modal__header">
+      <div>
+        <span class="quiet-paper-modal__eyebrow">Archival Standards</span>
+        <h2 id="QuietPaperModalTitle-{{ section.id }}" class="quiet-paper-modal__title">Paper & Fountain Pen Guide</h2>
+      </div>
+      <button type="button" class="quiet-paper-modal__close" data-close-modal aria-label="Close paper guide">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="quiet-paper-modal__body">
+      <p class="quiet-paper-modal__intro">
+        Every journal at The Quiet Page is crafted with heavyweight, acid-free archival paper chosen specifically to make writing feel tactile and effortless.
+      </p>
+
+      <div class="quiet-paper-specs-grid">
+        <div class="quiet-paper-spec-card">
+          <div class="quiet-paper-spec__weight">120 GSM</div>
+          <div class="quiet-paper-spec__name">Our Signature Journal Paper</div>
+          <p class="quiet-paper-spec__desc">Rich, smooth tooth with optimal absorption. Designed for daily reflection, gratitude, and long-form writing.</p>
+          <ul class="quiet-paper-spec__checks">
+            <li><strong>Bleed-through:</strong> Zero bleed with gel, ballpoint, and fountain pens</li>
+            <li><strong>Ghosting:</strong> Extremely minimal show-through</li>
+            <li><strong>Color:</strong> Soft warm cream (#F7F3ED) that reduces eye strain</li>
+          </ul>
+        </div>
+
+        <div class="quiet-paper-spec-card">
+          <div class="quiet-paper-spec__weight">160 GSM</div>
+          <div class="quiet-paper-spec__name">Mixed Media & Art Paper</div>
+          <p class="quiet-paper-spec__desc">Ultra-thick fine art paper for creative journaling, brush pens, wet inks, and light watercolors.</p>
+          <ul class="quiet-paper-spec__checks">
+            <li><strong>Bleed-through:</strong> None; handles wet media without warping</li>
+            <li><strong>Ghosting:</strong> 100% opaque</li>
+            <li><strong>Surface:</strong> Smooth matte finish for clean linework</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quiet-ink-testing-box">
+        <h3 class="quiet-ink-testing__title">Tested & Verified Inks</h3>
+        <p class="quiet-ink-testing__subtitle">Tested in our studio with the world's most popular writing instruments:</p>
+        <div class="quiet-ink-tags">
+          <span class="quiet-ink-tag">Fountain Pens (Fine to Broad)</span>
+          <span class="quiet-ink-tag">Pilot Iroshizuku Inks</span>
+          <span class="quiet-ink-tag">Sailor Shikiori Inks</span>
+          <span class="quiet-ink-tag">Lamy T10 & Bottled</span>
+          <span class="quiet-ink-tag">Sakura Pigma Micron</span>
+          <span class="quiet-ink-tag">Uni-ball One Gel</span>
+          <span class="quiet-ink-tag">Zebra Sarasa Clip</span>
+        </div>
+      </div>
+
+      <div class="quiet-binding-highlight">
+        <div class="quiet-binding-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+        <div>
+          <h4 class="quiet-binding__heading">180° Lay-Flat Smyth-Sewn Binding</h4>
+          <p class="quiet-binding__text">Our journals open completely flat from page 1 to 192. Whether left-handed or right-handed, you never have to fight the spine.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var modalId = 'QuietPaperGuideModal-{{ section.id }}';
+    var modal = document.getElementById(modalId);
+    var openBtns = document.querySelectorAll('[data-open-paper-guide]');
+    if (!modal) return;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('quiet-modal-open');
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('quiet-modal-open');
+    }
+
+    openBtns.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    var closeEls = modal.querySelectorAll('[data-close-modal]');
+    closeEls.forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeModal();
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+  })();
+</script>
